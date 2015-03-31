@@ -7,9 +7,5 @@ The purpose of this project is to to integrate your Storm applications with our 
 begin tracking application-level metrics from our topologies.
 
 
-1. Code structure
-
-2. Commands
-
-3. Deployment
+This code to report storm topology build-in metrics to graphite
 
