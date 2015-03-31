@@ -1,0 +1,378 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+
+  	<groupId>storm.ingress</groupId>
+  	<artifactId>kafka-storm-metrics</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+        <packaging>jar</packaging>
+
+        <name>kafka-storm-metrics</name>
+        <url>http://stash.pof.local/projects/DO/repos/kafka/browse/kafka-storm-metrics</url>
+
+        <properties>
+          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        </properties>
+
+        <repositories> 
+          <repository> 
+             <id>clojars.org</id> 
+             <url>http://clojars.org/repo</url> 
+          </repository> 
+        </repositories> 
+<!--
+        <pluginRepositories>
+            <pluginRepository>
+                  <id>scala-tools.org</id>
+                  <name>Scala-tools Maven2 Repository</name>
+                  <url>http://scala-tools.org/repo-releases</url>
+            </pluginRepository>
+        </pluginRepositories>
+-->
+
+  
+	<dependencies>
+    	    <!-- For the postgresql -->
+
+   	 	<dependency>
+      		<groupId>org.postgresql</groupId>
+      		<artifactId>postgresql</artifactId>
+      		<version>9.3-1100-jdbc4</version>
+    	</dependency>
+
+
+          <!-- json API -->
+    <dependency>
+        	<groupId>org.json</groupId>
+        	<artifactId>json</artifactId>
+        	<version>20140107</version>
+    </dependency> 
+           
+       <!-- Slf4j Logger -->
+
+	<dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>slf4j-simple</artifactId>
+	        <version>1.7.2</version>
+	</dependency>
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.17</version>
+	</dependency>
+ 
+           
+		<!-- Scala 2.9.2 -->
+	<dependency>
+	        <groupId>org.scala-lang</groupId>
+	        <artifactId>scala-library</artifactId>
+	        <version>2.9.2</version>
+	</dependency>
+
+        <!-- mockito 1.9.0 -->
+    <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.0</version>
+            <scope>test</scope>
+    </dependency>
+
+        <!-- junit 4.11 -->
+    <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+    </dependency>
+  
+        
+        <!-- curator 2.4.0 -->
+
+    <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>2.4.0</version>
+            <exclusions>   
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+   
+    </dependency>
+
+    <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>2.4.0</version>
+    
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+   
+    </dependency>
+
+    <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-test</artifactId>
+            <version>2.4.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>test</scope>
+    </dependency>
+
+       <!-- zookeeper 3.4.5 -->
+
+    <dependency>
+           <groupId>org.apache.zookeeper</groupId>
+           <artifactId>zookeeper</artifactId>
+           <version>3.4.5</version> 
+           <scope>compile</scope>
+           <exclusions>
+                  <exclusion>
+                      <groupId>com.sun.jmx</groupId>
+                      <artifactId>jmxri</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>com.sun.jdmk</groupId>
+                      <artifactId>jmxtools</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>javax.jms</groupId>
+                      <artifactId>jms</artifactId>
+                  </exclusion>
+                  <exclusion> 
+                      <groupId>org.slf4j</groupId>
+                      <artifactId>slf4j-log4j12</artifactId>
+                  </exclusion>
+                  <exclusion> 
+                      <groupId>log4j</groupId>
+                      <artifactId>log4j</artifactId>
+                  </exclusion>
+           </exclusions>
+    </dependency>
+
+	    
+	    <!-- Kafka 0.8.1.1 compiled Scala 2.9.2 -->
+    <dependency>
+		<groupId>org.apache.kafka</groupId>
+		<artifactId>kafka_2.9.2</artifactId>
+		<version>0.8.1.1</version>
+        <scope>compile</scope>
+                              <!-- exclude the zookeeper package from Kafka -->
+                <exclusions>
+                  <exclusion>
+                       <groupId>org.apache.zookeeper</groupId>
+                       <artifactId>zookeeper</artifactId>
+                  </exclusion>
+                  <exclusion>
+                       <groupId>log4j</groupId>
+                       <artifactId>log4j</artifactId>
+                  </exclusion>
+                  <exclusion>
+                       <groupId>com.sun.jmx</groupId>
+                       <artifactId>jmxri</artifactId>
+                  </exclusion>
+                  <exclusion>
+                       <groupId>com.sun.jdmk</groupId>
+                       <artifactId>jmxtools</artifactId>
+                  </exclusion>
+                  <exclusion>
+                       <groupId>javax.jms</groupId>
+                       <artifactId>jms</artifactId>
+                  </exclusion>
+                </exclusions>
+     
+	</dependency>
+	
+        	<!-- Storm-Kafka compiled -->
+
+        <dependency>
+            <artifactId>storm-kafka</artifactId>
+            <groupId>org.apache.storm</groupId>
+            <version>0.9.2-incubating</version>
+            <!--
+                      <scope>*compile*</scope>
+            -->
+            <!-- exclude the zookeeper package from storm-Kafka -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.zookeeper</groupId>
+                    <artifactId>zookeeper</artifactId>
+                </exclusion>
+            </exclusions>
+
+        </dependency>
+
+        <dependency>
+            <groupId>nl.minvenj.nfi.storm</groupId>
+            <artifactId>kafka-spout</artifactId>
+            <version>0.2</version>
+        </dependency>
+
+<!--     <dependency>
+            <groupId>storm</groupId>
+            <artifactId>storm-kafka</artifactId>
+            <version>0.9.0-wip16a-scala292</version>
+
+                <exclusions>
+                   <exclusion>
+                       <groupId>org.apache.zookeeper</groupId>
+                       <artifactId>zookeeper</artifactId>
+                   </exclusion>
+                </exclusions>
+           
+     </dependency>-->
+
+       <!-- testng 6.8.5 -->
+     <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.5</version>
+            <scope>test</scope>
+     </dependency>
+       <!-- easytesting -->
+     <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert-core</artifactId>
+            <version>2.0M8</version>
+            <scope>test</scope>
+     </dependency>
+       <!-- jmock -->
+     <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock</artifactId>
+            <version>2.6.0</version>
+            <scope>test</scope>
+     </dependency>
+
+      <!-- storm 0.9.2 -->
+     <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-core</artifactId>
+            <version>0.9.2-incubating</version>
+            <!-- keep storm out of the jar-with-dependencies -->
+            <scope>provided</scope>
+ 
+     </dependency>
+
+     <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+     </dependency>
+     <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>15.0</version>
+            <scope>compile</scope>
+     </dependency>
+
+      <!-- metrics -->
+     <dependency>
+            <groupId>com.github.staslev</groupId>
+            <artifactId>storm-metrics-reporter</artifactId>
+            <version>1.4.1</version>
+     </dependency>
+
+     <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.1.0</version>
+     </dependency>
+
+     <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-graphite</artifactId>
+            <version>3.0.2</version>
+     </dependency>
+     
+</dependencies>
+
+<build>
+     <sourceDirectory>src/jvm</sourceDirectory>  
+    <testSourceDirectory>test/jvm</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>${basedir}/multilang</directory>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!--
+        Bind the maven-assembly-plugin to the package phase
+        this will create a jar file without the storm dependencies
+        suitable for deployment to a cluster.
+       -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <mainClass></mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>java</executable>
+          <includeProjectDependencies>true</includeProjectDependencies>
+          <includePluginDependencies>false</includePluginDependencies>
+          <classpathScope>compile</classpathScope>
+          <mainClass>${storm.topology}</mainClass>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+
+</project>

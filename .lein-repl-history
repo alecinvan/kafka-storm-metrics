@@ -1,0 +1,18 @@
+(def drpc(backtype.storm.LocalDRPC.))
+(def drpc(backtype.storm.LocalCluster.))
+(def drpc(backtype.storm.LocalDRPC.))
+(def cluster(backtype.storm.LocalCluster.))
+(def builder(storm.starter.ReachTopology/construct))
+(.submitTopology cluster "reach" {} (.createlocalTopology builder drpc))
+(def builder(storm.starter.ReachTopology/construct))(.submitTopology cluster "reach" {} (.createlocalTopology builder drpc))
+(def builder(storm.starter.ReachTopology/construct))
+(.submitTopology cluster "reach" {} (.createlocalTopology builder drpc))
+(def builder(storm.starter.ReachTopology/construct)) (.submitTopology cluster "reach" {} (.createlocalTopology builder drpc))
+(def drpc(backtype.storm.LocalDRPC.))
+(def cluster(backtype.storm.LocalCluster.)) 
+(def builder(storm.starter.ReachTopology/construct)) (.submitTopology cluster "reach" {} (.createlocalTopology builder drpc))
+(def builder(storm.starter.ReachTopology/construct)) (.submitTopology cluster "reach" {} (.localTopology builder drpc))
+(def builder(storm.starter.ReachTopology/construct)) (.submitTopology cluster "reach" {} (.LocalTopology builder drpc))
+(def builder(storm.starter.ReachTopology/construct)) (.submitTopology cluster "reach" {} (.createLocalTopology builder drpc))
+(def builder(storm.starter.ReachTopology/construct)) (.submitTopology cluster "reach" {} (.createLocalTopology builder drpc))#'user/builder
+(def builder (storm.starter.ReachTopology/construct)) (.submitTopology cluster "reach" {} (.createLocalTopology builder drpc))#'user/builder
